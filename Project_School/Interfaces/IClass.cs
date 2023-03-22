@@ -1,5 +1,4 @@
-﻿
-namespace Project_School;
+﻿namespace Project_School.Interfaces;
 
 public interface IClass
 {

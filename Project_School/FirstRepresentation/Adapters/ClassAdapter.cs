@@ -1,4 +1,6 @@
-﻿namespace Project_School.FirstRepresentation;
+﻿using Project_School.Interfaces;
+
+namespace Project_School.FirstRepresentation.Adapters;
 
 public class ClassAdapter : IClass
 {

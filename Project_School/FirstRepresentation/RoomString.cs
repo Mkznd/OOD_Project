@@ -1,4 +1,6 @@
-﻿namespace Project_School.FirstRepresentation;
+﻿using Project_School.Enums;
+
+namespace Project_School.FirstRepresentation;
 public class RoomString
 {
     public RoomString(uint number, RoomType type, List<string> classes)

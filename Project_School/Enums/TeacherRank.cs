@@ -1,4 +1,4 @@
-﻿namespace Project_School;
+﻿namespace Project_School.Enums;
 
 public enum TeacherRank
 {

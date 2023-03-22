@@ -1,4 +1,7 @@
-﻿namespace Project_School.BaseRepresentation;
+﻿using Project_School.Enums;
+using Project_School.Interfaces;
+
+namespace Project_School.BaseRepresentation;
 
 public class Teacher: ITeacher
 {

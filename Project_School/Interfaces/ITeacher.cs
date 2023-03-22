@@ -1,4 +1,6 @@
-﻿namespace Project_School;
+﻿using Project_School.Enums;
+
+namespace Project_School.Interfaces;
 
 public interface ITeacher : IHuman
 {

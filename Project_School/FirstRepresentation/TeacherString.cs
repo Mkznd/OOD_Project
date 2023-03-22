@@ -1,4 +1,8 @@
-﻿namespace Project_School.FirstRepresentation;
+﻿using Project_School.Enums;
+using Project_School.FirstRepresentation.Adapters;
+using Project_School.Interfaces;
+
+namespace Project_School.FirstRepresentation;
 
 public class TeacherString
 {

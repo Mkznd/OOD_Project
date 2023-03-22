@@ -1,4 +1,6 @@
-﻿namespace Project_School;
+﻿using Project_School.Interfaces;
+
+namespace Project_School;
 
 public static class TeacherList
 {
