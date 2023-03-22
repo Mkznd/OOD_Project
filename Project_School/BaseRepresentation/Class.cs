@@ -9,6 +9,7 @@ public class Class : IClass
         Duration = duration;
         Teachers = teachers;
         Students = students;
+        ClassList.Classes.Add(ClassList.GetId(this), this);
     }
 
     public string Name { get; set; }

@@ -10,6 +10,7 @@ public class Teacher: ITeacher
         Rank = rank;
         Code = code;
         Classes = classes;
+        TeacherList.Teachers.Add(TeacherList.GetId(this), this);
     }
     public TeacherRank Rank { get; set; }
     public string Code { get; set; }

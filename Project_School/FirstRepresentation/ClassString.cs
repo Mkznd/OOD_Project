@@ -1,19 +1,19 @@
 ﻿namespace Project_School.FirstRepresentation;
 
 
-public class ClassString : IStringClass
+public class ClassString
 {
-    public static readonly Dictionary<string, ClassString> Classes = new();
 
-    public ClassString(string name, string code, uint duration, List<TeacherString> teachers,
-        List<StudentString> students) 
+    public ClassString(string name, string code, uint duration, List<ITeacher> teachers,
+        List<IHuman> students) 
     {
         Name = name;
         Code = code;
         Duration = duration;
-        Teachers = teachers.Select(TeacherString.GetId).ToList();
-        Students = students.Select(StudentString.GetId).ToList();
-        Classes.Add(GetId(this), this);
+        Teachers = teachers.Select(TeacherList.GetId).ToList();
+        Students = students.Select(StudentList.GetId).ToList();
+        var adapter = new ClassAdapter(this);
+        ClassList.Classes.Add(ClassList.GetId(adapter), adapter);
     }
 
     public string Name { get; set; }
@@ -24,11 +24,6 @@ public class ClassString : IStringClass
 
     public override string ToString()
     {
-        return $"{Code} {Name} {string.Join(' ', Students)} {string.Join(' ', Students)}";
-    }
-
-    public static string GetId(ClassString classString)
-    {
-        return $"{classString.Name}{classString.Code}{classString.Duration}";
+        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
     }
 }

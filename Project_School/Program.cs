@@ -1,4 +1,5 @@
 ﻿using Project_School.BaseRepresentation;
+using Project_School.FirstRepresentation;
 
 namespace Project_School;
 
@@ -31,9 +32,11 @@ internal static class Program
             new Teacher(nt, "sur2", TeacherRank.MiB, "code2"),
             new Teacher(nt, "sur3", TeacherRank.KiB, "code3 ")
         };
-        var classes = new List<Class>()
+        var a = new ClassString("c_nameAaaaa", "codeAaaa", 3, teachers, students);
+        var classes = new List<IClass>()
         {
             new Class("c_nameA", "codeA", 3, teachers, students),
+            new ClassAdapter(a),
         };
         students.ForEach(Console.WriteLine);
         teachers.ForEach(Console.WriteLine);

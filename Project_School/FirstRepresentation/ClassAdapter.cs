@@ -4,18 +4,19 @@ public class ClassAdapter : IClass
 {
     private List<ITeacher> GetTeachers()
     {
-        return TeacherString.Teachers
+        var a =TeacherList.Teachers
             .Where(kvp=> _classString.Teachers.Contains(kvp.Key))
             .Select(kvp => kvp.Value).ToList();
+        return a;
     }
     
     private List<IHuman> GetStudents()
     {
-        return StudentString.Students
+        return StudentList.Students
             .Where(kvp=> _classString.Students.Contains(kvp.Key))
             .Select(kvp => kvp.Value).Select(s => (IHuman)s).ToList();
     }
-    public ClassAdapter(ClassString classString, string name, string code, uint duration, List<ITeacher> teachers, List<IHuman> students)
+    public ClassAdapter(ClassString classString)
     {
         _classString = classString;
     }
@@ -37,13 +38,18 @@ public class ClassAdapter : IClass
     public List<ITeacher> Teachers
     {
         get => GetTeachers();
-        set => _classString.Teachers = value.Select(TeacherString.GetId).ToList();
+        set => _classString.Teachers = value.Select(TeacherList.GetId).ToList();
     }
 
     public List<IHuman> Students
     {
         get => GetStudents();
-        set => _classString.Students = value.Select(StudentString.GetId).ToList();
+        set => _classString.Students = value.Select(StudentList.GetId).ToList();
+    }
+    
+    public override string ToString()
+    {
+        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
     }
 
     private readonly ClassString _classString;

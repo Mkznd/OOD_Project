@@ -2,26 +2,19 @@
 
 public class StudentString : IStudent
 {
-    public static readonly Dictionary<string, IStudent> Students = new();
-    
     public uint Semester { get; set; }
-    public StudentString(List<string> names, string surname, uint semester, List<ClassString>? classes = null)
+    public StudentString(List<string> names, string surname, uint semester, List<IClass>? classes = null)
     {
         Names = names;
         Surname = surname;
         Semester = semester;
-        Students.Add(GetId(this), this);
-        Classes = classes?.Select(ClassString.GetId).ToList();
+        StudentList.Students.Add(StudentList.GetId(this), this);
+        Classes = classes?.Select(ClassList.GetId).ToList();
     }
 
     public override string ToString()
     {
         return $"{string.Join(" ", Names)} {Surname} {Semester}";
-    }
-
-    public static string GetId(IHuman studentString)
-    {
-        return $"{string.Join(' ', studentString.Names)}{studentString.Surname}";
     }
 
     public List<string> Names { get; set; }

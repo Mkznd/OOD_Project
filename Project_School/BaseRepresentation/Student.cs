@@ -8,6 +8,7 @@ public class Student : IStudent
         Surname = surname;
         Semester = semester;
         Classes = classes;
+        StudentList.Students.Add(StudentList.GetId(this), this);
     }
     public uint Semester { get; set; }
     public override string ToString()
