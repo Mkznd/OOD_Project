@@ -1,4 +1,5 @@
 ﻿using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
@@ -42,6 +43,6 @@ public class StudentAdapter : IStudent
     }
     public override string ToString()
     {
-        return $"{string.Join(" ", Names)} {Surname} {Semester}";
+        return StudentStringBuilder.GetString(this);
     }
 }

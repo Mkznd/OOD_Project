@@ -1,4 +1,5 @@
 ﻿using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
 
@@ -22,6 +23,6 @@ public class Class : IClass
 
     public override string ToString()
     {
-        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
+        return ClassStringBuilder.GetString(this);
     }
 }

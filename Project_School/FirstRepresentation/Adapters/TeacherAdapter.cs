@@ -1,5 +1,6 @@
 ﻿using Project_School.Enums;
 using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
@@ -49,6 +50,6 @@ public class TeacherAdapter : ITeacher
     }
     public override string ToString()
     {
-        return $"{string.Join(" ", Names)} {Surname}";
+        return TeacherStringBuilder.GetString(this);
     }
 }

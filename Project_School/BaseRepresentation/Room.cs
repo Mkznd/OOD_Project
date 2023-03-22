@@ -1,5 +1,6 @@
 ﻿using Project_School.Enums;
 using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
 
@@ -19,6 +20,6 @@ public class Room : IRoom
 
     public override string ToString()
     {
-        return $"{Type} {Number}";
+        return  RoomStringBuilder.GetString(this);
     }
 }

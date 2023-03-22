@@ -1,4 +1,5 @@
 ﻿using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
@@ -49,7 +50,7 @@ public class ClassAdapter : IClass
     }
     public override string ToString()
     {
-        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
+        return ClassStringBuilder.GetString(this);
     }
 
     private readonly ClassString _classString;

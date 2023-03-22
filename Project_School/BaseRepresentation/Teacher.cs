@@ -1,5 +1,6 @@
 ﻿using Project_School.Enums;
 using Project_School.Interfaces;
+using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
 
@@ -23,6 +24,6 @@ public class Teacher: ITeacher
     
     public override string ToString()
     {
-        return $"{string.Join(" ", Names)} {Surname} {Code}";
+        return TeacherStringBuilder.GetString(this);
     }
 }
