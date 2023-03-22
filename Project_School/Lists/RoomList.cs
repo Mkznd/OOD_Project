@@ -1,6 +1,6 @@
 ﻿using Project_School.Interfaces;
 
-namespace Project_School;
+namespace Project_School.Lists;
 
 public static class RoomList
 {
@@ -11,7 +11,6 @@ public static class RoomList
     }
     public static void AddToList(IRoom room)
     {
-        //TODO MORE ABSTRACTION TO EVERY CLASS
         Rooms.Add(GetId(room), room);
     }
 }

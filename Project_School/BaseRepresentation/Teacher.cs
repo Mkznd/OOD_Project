@@ -1,5 +1,6 @@
 ﻿using Project_School.Enums;
 using Project_School.Interfaces;
+using Project_School.Lists;
 using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
@@ -14,7 +15,7 @@ public class Teacher: ITeacher
         Rank = rank;
         Code = code;
         Classes = classes;
-        TeacherList.Teachers.Add(TeacherList.GetId(this), this);
+        TeacherList.AddToList(this);
     }
     public TeacherRank Rank { get; set; }
     public string Code { get; set; }

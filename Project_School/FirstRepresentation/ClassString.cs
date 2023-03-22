@@ -1,5 +1,6 @@
 ﻿using Project_School.FirstRepresentation.Adapters;
 using Project_School.Interfaces;
+using Project_School.Lists;
 
 namespace Project_School.FirstRepresentation;
 
@@ -15,8 +16,7 @@ public class ClassString
         Duration = duration;
         Teachers = teachers.Select(TeacherList.GetId).ToList();
         Students = students.Select(StudentList.GetId).ToList();
-        var adapter = new ClassAdapter(this);
-        ClassList.Classes.Add(ClassList.GetId(adapter), adapter);
+        ClassList.AddToList(new ClassAdapter(this));
     }
 
     public string Name { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Project_School.FirstRepresentation.Adapters;
 using Project_School.Interfaces;
+using Project_School.Lists;
 
 namespace Project_School.FirstRepresentation;
 
@@ -11,9 +12,8 @@ public class StudentString
         Names = names;
         Surname = surname;
         Semester = semester;
-        var studentAdapter = new StudentAdapter(this);
-        StudentList.Students.Add(StudentList.GetId(studentAdapter), studentAdapter);
         Classes = classes?.Select(ClassList.GetId).ToList();
+        StudentList.AddToList(new StudentAdapter(this));
     }
     public List<string> Names { get; set; }
     public string Surname { get; set; }

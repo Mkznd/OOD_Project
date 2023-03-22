@@ -1,6 +1,6 @@
 ﻿using Project_School.Interfaces;
 
-namespace Project_School;
+namespace Project_School.Lists;
 
 public static class TeacherList
 {
@@ -10,5 +10,9 @@ public static class TeacherList
     {
         return $"{teacherString.Rank}{string.Join(' ', teacherString.Names)}" +
                $"{teacherString.Surname}{teacherString.Code}";
+    }
+    public static void AddToList(ITeacher teacher)
+    {
+        Teachers.Add(GetId(teacher), teacher);
     }
 }

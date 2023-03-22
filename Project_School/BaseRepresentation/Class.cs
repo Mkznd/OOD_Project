@@ -1,4 +1,6 @@
-﻿using Project_School.Interfaces;
+﻿using Project_School.FirstRepresentation.Adapters;
+using Project_School.Interfaces;
+using Project_School.Lists;
 using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
@@ -12,7 +14,7 @@ public class Class : IClass
         Duration = duration;
         Teachers = teachers;
         Students = students;
-        ClassList.Classes.Add(ClassList.GetId(this), this);
+        ClassList.AddToList(this);
     }
 
     public string Name { get; set; }

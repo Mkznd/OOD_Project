@@ -1,6 +1,6 @@
 ﻿using Project_School.Interfaces;
 
-namespace Project_School;
+namespace Project_School.Lists;
 
 public static class ClassList
 {
@@ -9,5 +9,9 @@ public static class ClassList
     public static string GetId(IClass classString)
     {
         return $"{classString.Name}{classString.Code}{classString.Duration}";
+    }
+    public static void AddToList(IClass @class)
+    {
+        Classes.Add(GetId(@class), @class);
     }
 }

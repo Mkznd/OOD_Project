@@ -1,4 +1,5 @@
 ﻿using Project_School.Interfaces;
+using Project_School.Lists;
 using Project_School.StringBuilders;
 
 namespace Project_School.BaseRepresentation;
@@ -11,7 +12,7 @@ public class Student : IStudent
         Surname = surname;
         Semester = semester;
         Classes = classes;
-        StudentList.Students.Add(StudentList.GetId(this), this);
+        StudentList.AddToList(this);
     }
     public uint Semester { get; set; }
     public List<string> Names { get; set; }

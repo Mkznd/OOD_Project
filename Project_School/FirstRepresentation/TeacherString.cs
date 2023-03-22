@@ -1,6 +1,7 @@
 ﻿using Project_School.Enums;
 using Project_School.FirstRepresentation.Adapters;
 using Project_School.Interfaces;
+using Project_School.Lists;
 
 namespace Project_School.FirstRepresentation;
 
@@ -15,9 +16,8 @@ public class TeacherString
         Surname = surname;
         Rank = rank;
         Code = code;
-        var teacherAdapter = new TeacherAdapter(this);
-        TeacherList.Teachers.Add(TeacherList.GetId(teacherAdapter), teacherAdapter);
         Classes = classes?.Select(ClassList.GetId).ToList();
+        TeacherList.AddToList(new TeacherAdapter(this));
     }
 
     public List<string> Names { get; set; }
