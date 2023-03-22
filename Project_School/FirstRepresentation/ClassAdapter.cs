@@ -4,10 +4,9 @@ public class ClassAdapter : IClass
 {
     private List<ITeacher> GetTeachers()
     {
-        var a =TeacherList.Teachers
+        return TeacherList.Teachers
             .Where(kvp=> _classString.Teachers.Contains(kvp.Key))
             .Select(kvp => kvp.Value).ToList();
-        return a;
     }
     
     private List<IHuman> GetStudents()
@@ -46,7 +45,6 @@ public class ClassAdapter : IClass
         get => GetStudents();
         set => _classString.Students = value.Select(StudentList.GetId).ToList();
     }
-    
     public override string ToString()
     {
         return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";

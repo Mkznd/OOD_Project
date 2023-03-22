@@ -1,8 +1,7 @@
 ﻿namespace Project_School.FirstRepresentation;
 
-public class TeacherString: ITeacher
+public class TeacherString
 {
-
     public TeacherRank Rank { get; set; }
     public string Code { get; set; }
     public TeacherString(List<string> names, string surname, TeacherRank rank,
@@ -12,7 +11,8 @@ public class TeacherString: ITeacher
         Surname = surname;
         Rank = rank;
         Code = code;
-        TeacherList.Teachers.Add(TeacherList.GetId(this), this);
+        var teacherAdapter = new TeacherAdapter(this);
+        TeacherList.Teachers.Add(TeacherList.GetId(teacherAdapter), teacherAdapter);
         Classes = classes?.Select(ClassList.GetId).ToList();
     }
 

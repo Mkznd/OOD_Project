@@ -21,9 +21,4 @@ public class ClassString
     public uint Duration { get; set; }
     public List<string> Teachers { get; set; }
     public List<string> Students { get; set; }
-
-    public override string ToString()
-    {
-        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
-    }
 }

@@ -1,14 +1,4 @@
 ﻿namespace Project_School.FirstRepresentation;
-
-public enum RoomType
-{
-    Laboratory,
-    Training,
-    Lecture,
-    Other
-    
-}
-
 public class RoomString
 {
     public RoomString(uint number, RoomType type, List<string> classes)

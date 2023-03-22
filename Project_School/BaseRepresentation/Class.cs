@@ -20,6 +20,6 @@ public class Class : IClass
 
     public override string ToString()
     {
-        return $"{Code} {Name} {string.Join(' ', Students)} {string.Join(' ', Students)}";
+        return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
     }
 }
