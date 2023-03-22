@@ -1,6 +1,6 @@
 ﻿namespace Project_School.BaseRepresentation;
 
-public class Student : IHuman, IStudent
+public class Student : IStudent
 {
     public Student(List<string> names, string surname, uint semester, List<IClass>? classes = null)
     {

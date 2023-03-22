@@ -1,6 +1,6 @@
 ﻿namespace Project_School.BaseRepresentation;
 
-public class Teacher: IHuman, ITeacher
+public class Teacher: ITeacher
 {
    
     public Teacher(List<string> names, string surname, TeacherRank rank, string code, List<IClass>? classes = null)
