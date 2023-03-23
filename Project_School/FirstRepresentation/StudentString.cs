@@ -13,7 +13,7 @@ public class StudentString
         Surname = surname;
         Semester = semester;
         Classes = classes?.Select(ClassList.GetId).ToList();
-        StudentList.AddToList(new StudentAdapter(this));
+        StudentList.AddToList(new StudentStringAdapter(this));
     }
     public List<string> Names { get; set; }
     public string Surname { get; set; }

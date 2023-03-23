@@ -4,7 +4,7 @@ using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
-public class ClassAdapter : IClass
+public class ClassStringAdapter : IClass
 {
     private List<ITeacher> GetTeachers()
     {
@@ -19,7 +19,7 @@ public class ClassAdapter : IClass
             .Where(kvp=> _classString.Students.Contains(kvp.Key))
             .Select(kvp => kvp.Value).Select(s => (IHuman)s).ToList();
     }
-    public ClassAdapter(ClassString classString)
+    public ClassStringAdapter(ClassString classString)
     {
         _classString = classString;
     }

@@ -16,7 +16,7 @@ public class ClassString
         Duration = duration;
         Teachers = teachers.Select(TeacherList.GetId).ToList();
         Students = students.Select(StudentList.GetId).ToList();
-        ClassList.AddToList(new ClassAdapter(this));
+        ClassList.AddToList(new ClassStringAdapter(this));
     }
 
     public string Name { get; set; }

@@ -4,7 +4,7 @@ using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
-public class StudentAdapter : IStudent
+public class StudentStringAdapter : IStudent
 {
     private List<IClass> GetClasses()
     {
@@ -15,7 +15,7 @@ public class StudentAdapter : IStudent
     }
     
     private readonly StudentString _studentString;
-    public StudentAdapter(StudentString studentString)
+    public StudentStringAdapter(StudentString studentString)
     {
         _studentString = studentString;
     }

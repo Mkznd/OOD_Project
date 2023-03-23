@@ -5,7 +5,7 @@ using Project_School.StringBuilders;
 
 namespace Project_School.FirstRepresentation.Adapters;
 
-public class RoomAdapter : IRoom
+public class RoomStringAdapter : IRoom
 {
     private readonly RoomString _roomString;
     private List<IClass> GetClasses()
@@ -15,7 +15,7 @@ public class RoomAdapter : IRoom
             .Where(kvp=> _roomString.Classes.Contains(kvp.Key))
             .Select(kvp => kvp.Value).ToList();
     }
-    public RoomAdapter(RoomString roomString)
+    public RoomStringAdapter(RoomString roomString)
     {
         _roomString = roomString;
     }

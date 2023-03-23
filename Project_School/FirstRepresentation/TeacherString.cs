@@ -17,7 +17,7 @@ public class TeacherString
         Rank = rank;
         Code = code;
         Classes = classes?.Select(ClassList.GetId).ToList();
-        TeacherList.AddToList(new TeacherAdapter(this));
+        TeacherList.AddToList(new TeacherStringAdapter(this));
     }
 
     public List<string> Names { get; set; }

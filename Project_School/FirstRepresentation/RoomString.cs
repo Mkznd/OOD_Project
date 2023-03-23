@@ -10,7 +10,7 @@ public class RoomString
         Number = number;
         Type = type;
         Classes = classes;
-        RoomList.AddToList(new RoomAdapter(this));
+        RoomList.AddToList(new RoomStringAdapter(this));
     }
 
     public uint Number { get; set; }
