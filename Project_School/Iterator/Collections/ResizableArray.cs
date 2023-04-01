@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 
-namespace Project_School.Iterator;
+namespace Project_School.Iterator.Collections;
 
-public class ResizableArray<T> : ICollection<T>
+/// <summary>
+///     Custom-implemented List, implements
+///     <see cref="Interfaces.ICollection{T}" />
+/// </summary>
+/// <typeparam name="T">Type of data to store</typeparam>
+/// <remarks>Similar to standard <c>List</c> in C# or <c>std::vector</c> in C++</remarks>
+public class ResizableArray<T> : Interfaces.ICollection<T>
 {
     private T?[] _items;
 
@@ -46,13 +52,13 @@ public class ResizableArray<T> : ICollection<T>
         return GetEnumerator();
     }
 
-    public IEnumerator<T> GetReverseEnumerator()
+    private IEnumerator<T> GetReverseEnumerator()
     {
         for (var i = Count - 1; i >= 0; i--)
             yield return _items[i] ?? throw new InvalidOperationException();
     }
 
-    public IEnumerator<T> GetForwardEnumerator()
+    private IEnumerator<T> GetForwardEnumerator()
     {
         for (var i = 0; i < Count; i++) yield return _items[i] ?? throw new InvalidOperationException();
     }

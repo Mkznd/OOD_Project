@@ -4,6 +4,8 @@ using Project_School.FirstRepresentation;
 using Project_School.FirstRepresentation.Adapters;
 using Project_School.Interfaces;
 using Project_School.Iterator;
+using Project_School.Iterator.Algorithms;
+using Project_School.Iterator.Collections;
 using Project_School.SecondRepresentation;
 using Project_School.SecondRepresentation.Adapters;
 

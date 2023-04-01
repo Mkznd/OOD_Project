@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 
-namespace Project_School.Iterator;
+namespace Project_School.Iterator.Collections;
 
+/// <summary>
+///     Node for the custom <see cref="DoubleLinkedList{T}" />
+/// </summary>
+/// <typeparam name="T">Type of data to store</typeparam>
 public class LinkedListNode<T>
 {
     public LinkedListNode(T value)
@@ -16,7 +20,11 @@ public class LinkedListNode<T>
     public LinkedListNode<T>? Next { get; set; }
 }
 
-public class DoubleLinkedList<T> : ICollection<T>
+/// <summary>
+///     Custom-implemented Double Linked List, implements <see cref="Interfaces.ICollection{T}" />
+/// </summary>
+/// <typeparam name="T">Type of data to store</typeparam>
+public class DoubleLinkedList<T> : Interfaces.ICollection<T>
 {
     private LinkedListNode<T>? _head;
     private LinkedListNode<T>? _tail;
@@ -88,7 +96,7 @@ public class DoubleLinkedList<T> : ICollection<T>
         return GetEnumerator();
     }
 
-    public IEnumerator<T> GetReverseEnumerator()
+    private IEnumerator<T> GetReverseEnumerator()
     {
         var current = _tail;
 
