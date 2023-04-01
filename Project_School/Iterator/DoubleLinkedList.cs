@@ -4,24 +4,22 @@ namespace Project_School.Iterator;
 
 public class LinkedListNode<T>
 {
-    public T Value { get; set; }
-    public LinkedListNode<T>? Prev { get; set; }
-    public LinkedListNode<T>? Next { get; set; }
-
     public LinkedListNode(T value)
     {
         Value = value;
         Prev = null;
         Next = null;
     }
+
+    public T Value { get; set; }
+    public LinkedListNode<T>? Prev { get; set; }
+    public LinkedListNode<T>? Next { get; set; }
 }
 
-public class DoubleLinkedList<T> : ICollection<T>, IEnumerable<T>
+public class DoubleLinkedList<T> : ICollection<T>
 {
     private LinkedListNode<T>? _head;
     private LinkedListNode<T>? _tail;
-
-    public int Count { get; private set; }
 
     public DoubleLinkedList()
     {
@@ -29,6 +27,9 @@ public class DoubleLinkedList<T> : ICollection<T>, IEnumerable<T>
         _tail = null;
         Count = 0;
     }
+
+    public int Count { get; private set; }
+    public bool Reverse { get; set; } = false;
 
     public void PushBack(T value)
     {
@@ -55,10 +56,7 @@ public class DoubleLinkedList<T> : ICollection<T>, IEnumerable<T>
 
     public T PopBack()
     {
-        if (_tail == null)
-        {
-            throw new InvalidOperationException("The list is empty.");
-        }
+        if (_tail == null) throw new InvalidOperationException("The list is empty.");
 
         var value = _tail.Value;
 
@@ -78,17 +76,18 @@ public class DoubleLinkedList<T> : ICollection<T>, IEnumerable<T>
         return value;
     }
 
+    // IEnumerable implementation
+
     public IEnumerator<T> GetEnumerator()
     {
-        var current = _head;
-
-        while (current != null)
-        {
-            yield return current.Value;
-            current = current.Next;
-        }
+        return Reverse ? GetReverseEnumerator() : GetForwardEnumerator();
     }
-    
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
     public IEnumerator<T> GetReverseEnumerator()
     {
         var current = _tail;
@@ -100,8 +99,14 @@ public class DoubleLinkedList<T> : ICollection<T>, IEnumerable<T>
         }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
+    private IEnumerator<T> GetForwardEnumerator()
     {
-        return GetEnumerator();
+        var current = _head;
+
+        while (current != null)
+        {
+            yield return current.Value;
+            current = current.Next;
+        }
     }
 }
