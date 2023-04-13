@@ -36,7 +36,6 @@ public class ResizableArray<T> : Interfaces.ICollection<T>
         _items[Count] = default;
 
         if (Count <= _items.Length / 4) Array.Resize(ref _items, _items.Length / 2);
-
         return value;
     }
 

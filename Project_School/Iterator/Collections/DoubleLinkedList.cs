@@ -42,23 +42,7 @@ public class DoubleLinkedList<T> : Interfaces.ICollection<T>
     public void PushBack(T value)
     {
         var node = new LinkedListNode<T>(value);
-
-        if (_head == null)
-        {
-            _head = node;
-            _tail = node;
-        }
-        else
-        {
-            if (_tail != null)
-            {
-                _tail.Next = node;
-                node.Prev = _tail;
-            }
-
-            _tail = node;
-        }
-
+        InsertBack(node);
         Count++;
     }
 
@@ -94,6 +78,25 @@ public class DoubleLinkedList<T> : Interfaces.ICollection<T>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    private void InsertBack(LinkedListNode<T> node)
+    {
+        if (_head == null)
+        {
+            _head = node;
+            _tail = node;
+        }
+        else
+        {
+            if (_tail != null)
+            {
+                _tail.Next = node;
+                node.Prev = _tail;
+            }
+
+            _tail = node;
+        }
     }
 
     private IEnumerator<T> GetReverseEnumerator()
