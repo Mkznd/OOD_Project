@@ -1,14 +1,15 @@
 ﻿using System.Collections;
+using Project_School.Interfaces.Iterator;
 
 namespace Project_School.Iterator.Collections;
 
 /// <summary>
 ///     Custom-implemented List, implements
-///     <see cref="Interfaces.ICollection{T}" />
+///     <see cref="Interfaces.Iterator.ICollection{T}" />
 /// </summary>
 /// <typeparam name="T">Type of data to store</typeparam>
 /// <remarks>Similar to standard <c>List</c> in C# or <c>std::vector</c> in C++</remarks>
-public class ResizableArray<T> : Interfaces.ICollection<T>
+public class ResizableArray<T> : Interfaces.Iterator.ICollection<T>
 {
     private T?[] _items;
 

@@ -1,6 +1,8 @@
-﻿namespace Project_School.Interfaces;
+﻿using Project_School.Interfaces.Visitor;
 
-public interface IClass
+namespace Project_School.Interfaces.Common;
+
+public interface IClass : ICanBeVisited
 {
     public string Name { get; set; }
     public string Code { get; set; }
@@ -10,5 +12,9 @@ public interface IClass
     public string GetString()
     {
         return $"{Code} {Name}\nTeachers: {string.Join(' ', Teachers)}\nStudents: {string.Join(' ', Students)}";
+    }
+    void ICanBeVisited.Accept(IVisitor visitor)
+    {
+        visitor.VisitClass(this);
     }
 }

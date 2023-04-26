@@ -1,5 +1,6 @@
 ﻿using Project_School.Enums;
 using Project_School.Interfaces;
+using Project_School.Interfaces.Common;
 
 namespace Project_School.SecondRepresentation.Adapters;
 

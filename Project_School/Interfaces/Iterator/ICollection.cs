@@ -1,4 +1,4 @@
-﻿namespace Project_School.Interfaces;
+﻿namespace Project_School.Interfaces.Iterator;
 
 /// <summary>
 ///     Custom ICollection interface defines basic methods for collection manipulation, also <see cref="Reverse" />

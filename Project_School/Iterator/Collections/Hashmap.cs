@@ -2,7 +2,7 @@
 
 namespace Project_School.Iterator.Collections;
 
-public class Hashmap<T> : Interfaces.ICollection<T>
+public class Hashmap<T> : Interfaces.Iterator.ICollection<T>
 {
     private readonly T[] _array;
     private readonly int _capacity;

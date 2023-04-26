@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Project_School.Interfaces.Iterator;
 
 namespace Project_School.Iterator.Collections;
 
@@ -21,10 +22,10 @@ public class LinkedListNode<T>
 }
 
 /// <summary>
-///     Custom-implemented Double Linked List, implements <see cref="Interfaces.ICollection{T}" />
+///     Custom-implemented Double Linked List, implements <see cref="Interfaces.Iterator.ICollection{T}" />
 /// </summary>
 /// <typeparam name="T">Type of data to store</typeparam>
-public class DoubleLinkedList<T> : Interfaces.ICollection<T>
+public class DoubleLinkedList<T> : Interfaces.Iterator.ICollection<T>
 {
     private LinkedListNode<T>? _head;
     private LinkedListNode<T>? _tail;
