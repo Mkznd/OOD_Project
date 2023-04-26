@@ -9,6 +9,8 @@ using Project_School.Iterator.Algorithms;
 using Project_School.Iterator.Collections;
 using Project_School.SecondRepresentation;
 using Project_School.SecondRepresentation.Adapters;
+using Project_School.Visitor.Visitors;
+using static System.Enum;
 
 namespace Project_School;
 
@@ -16,6 +18,13 @@ internal static class Program
 {
     public static void Main()
     {
+        var rooms = new List<IRoom>()
+        {
+            new Room(1, RoomType.Lecture, new List<IClass>()),
+            new Room(2, RoomType.Laboratory, new List<IClass>()),
+            new Room(3, RoomType.Training, new List<IClass>())
+        };
+        
         var ns = new List<string>
         {
             "A",
@@ -65,7 +74,7 @@ internal static class Program
         // Iterator test
         var list = new DoubleLinkedList<int>();
         var array = new ResizableArray<int>();
-        var even = (Func<int, bool?>) (x => x % 2 == 0);
+        var even = (Func<int, bool?>)(x => x % 2 == 0);
         for (var i = -10; i < 10; i++)
         {
             list.PushBack(i);
@@ -99,5 +108,29 @@ internal static class Program
         Console.WriteLine(FindAlgorithm<int>.FindFirst(array, even, false));
         Console.WriteLine("Reverse = true");
         Console.WriteLine(FindAlgorithm<int>.FindFirst(array, even, true));
+        
+        Console.WriteLine("TASK 3//////////////////////////////////////////////");
+        var listVisitor = new ListVisitor();
+        var input = Console.ReadLine();
+        if (input == null) return;
+        var tryParse = TryParse(input, out Types type);
+        if (!tryParse) return;
+        switch (type)
+        {
+            case Types.Class:
+                classes.ForEach(c => c.Accept(listVisitor));
+                break;
+            case Types.Teacher:
+                teachers.ForEach(c => c.Accept(listVisitor));
+                break;
+            case Types.Student:
+                students.ForEach(c => c.Accept(listVisitor));
+                break;
+            case Types.Room:
+                rooms.ForEach(c => c.Accept(listVisitor));
+                break;
+            default:
+                throw new InvalidOperationException();
+        }
     }
 }
