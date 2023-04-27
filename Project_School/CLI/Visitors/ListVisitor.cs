@@ -1,7 +1,7 @@
 using Project_School.Interfaces.Common;
 using Project_School.Interfaces.Visitor;
 
-namespace Project_School.Visitor.Visitors;
+namespace Project_School.CLI.Visitors;
 
 public class ListVisitor : IVisitor
 {

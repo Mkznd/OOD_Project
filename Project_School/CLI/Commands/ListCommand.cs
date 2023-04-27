@@ -1,17 +1,23 @@
-﻿using Project_School.Enums;
+﻿using Project_School.CLI.Visitors;
+using Project_School.Enums;
 using Project_School.Interfaces.Visitor;
-using Project_School.Lists;
 using Project_School.Misc;
-using Project_School.Visitor.Visitors;
 
-namespace Project_School.Visitor.Commands;
+namespace Project_School.CLI.Commands;
 
 public class ListCommand : ICommand
 {
-    private readonly ListVisitor _visitor;
+    private ListVisitor _visitor;
     public Types Type { get; set; }
-
+    public ListCommand()
+    {
+        _visitor = new ListVisitor();
+    }
     public ListCommand(Types type)
+    {
+        Initialize(type, string.Empty);
+    }
+    public void Initialize(Types type, string args)
     {
         _visitor = new ListVisitor();
         Type = type;

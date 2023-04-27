@@ -1,4 +1,6 @@
-﻿using Project_School.Enums;
+﻿using System.Collections;
+using Project_School.CLI.Commands;
+using Project_School.Enums;
 using Project_School.Interfaces.Visitor;
 using Project_School.Lists;
 
@@ -6,6 +8,7 @@ namespace Project_School.Misc;
 
 public static class Utils
 {
+
     public static List<ICanBeVisited> GetListFromType(Types type)
     {
         return type switch
@@ -16,5 +19,15 @@ public static class Utils
             Types.Room => new List<ICanBeVisited>(RoomList.Rooms.Values.ToList()),
             _ => throw new InvalidOperationException()
         };
+    }
+
+    public static Queue<Queue<string>> GetTokensFromArgsString(string args)
+    {
+        var partiallyBroken = new Queue<string>(args.Split(","));
+        string[] delimiters = {"=", ">", "<"};
+        var result = partiallyBroken
+            .Select(s => new Queue<string>(s.Split(delimiters, StringSplitOptions.TrimEntries)));
+        var queue = new Queue<Queue<string>>(result);
+        return queue;
     }
 }

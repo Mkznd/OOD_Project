@@ -1,4 +1,5 @@
 ﻿using Project_School.BaseRepresentation;
+using Project_School.CLI.Commands;
 using Project_School.Enums;
 using Project_School.FirstRepresentation;
 using Project_School.FirstRepresentation.Adapters;
@@ -7,10 +8,10 @@ using Project_School.Interfaces.Common;
 using Project_School.Iterator;
 using Project_School.Iterator.Algorithms;
 using Project_School.Iterator.Collections;
+using Project_School.Lists;
+using Project_School.Misc;
 using Project_School.SecondRepresentation;
 using Project_School.SecondRepresentation.Adapters;
-using Project_School.Visitor.Commands;
-using Project_School.Visitor.Visitors;
 using static System.Enum;
 
 namespace Project_School;
@@ -104,11 +105,15 @@ internal static class Program
         Console.WriteLine(FindAlgorithm<int>.FindFirst(array, even, true));
         
         Console.WriteLine("TASK 3//////////////////////////////////////////////");
-        var input = Console.ReadLine();
-        if (input == null) return;
-        var tryParse = TryParse(input, out Types type);
+        var inputString = Console.ReadLine();
+        if (inputString == null) return;
+
+        var input = inputString.Split(' ', 3, StringSplitOptions.TrimEntries);
+        var tryParse = Enum.TryParse(input[1], true, out Types type);
         if (!tryParse) return;
-        var command = new ListCommand(type);
+        var command = CommandList.GetCommandFromString(input[0]);
+        var argsString = input.Length > 2 ? input[2] : string.Empty;
+        command.Initialize(type, argsString);
         command.Execute();
     }
 }
