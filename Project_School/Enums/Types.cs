@@ -5,5 +5,6 @@ public enum Types
     Class,
     Room,
     Teacher,
-    Student
+    Student,
+    Default
 }

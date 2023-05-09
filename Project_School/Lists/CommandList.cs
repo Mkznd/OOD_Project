@@ -8,7 +8,8 @@ public static class CommandList
     private static readonly Dictionary<string, ICommand> Commands = new()
     {
         {"list", new ListCommand()},
-        {"find", new FindCommand()}
+        {"find", new FindCommand()},
+        {"exit", new ExitCommand()}
     };
 
     public static ICommand GetCommandFromString(string s)

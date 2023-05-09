@@ -101,15 +101,28 @@ internal static class Program
         Console.WriteLine(FindAlgorithm<int>.FindFirst(array, even, true));
 
         Console.WriteLine("TASK 3//////////////////////////////////////////////");
-        var inputString = Console.ReadLine();
-        if (inputString == null) return;
-
-        var input = inputString.Split(' ', 3, StringSplitOptions.TrimEntries);
-        var tryParse = TryParse(input[1], true, out Types type);
-        if (!tryParse) return;
-        var command = CommandList.GetCommandFromString(input[0]);
-        var argsString = input.Length > 2 ? input[2] : string.Empty;
-        command.Initialize(type, argsString);
-        command.Execute();
+        while (true)
+        {
+            var inputString = Console.ReadLine();
+            if (inputString == null) return;
+            
+            var input = inputString.Split(' ', 3, StringSplitOptions.TrimEntries);
+            var command = CommandList.GetCommandFromString(input[0]);
+            bool tryParse;
+            Types type;
+            if (input.Length < 2)
+            {
+                tryParse = true;
+                type = Types.Default;
+            }
+            else
+            {
+                tryParse = TryParse(input[1], true, out type);
+            }
+            if (!tryParse) return;
+            var argsString = input.Length > 2 ? input[2] : string.Empty;
+            command.Initialize(type, argsString);
+            command.Execute();
+        }
     }
 }
