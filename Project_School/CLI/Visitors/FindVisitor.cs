@@ -7,13 +7,13 @@ namespace Project_School.CLI.Visitors;
 
 public class FindVisitor : IVisitor
 {
+    public Queue<Queue<string>> Args { get; set; }
+
     public FindVisitor(string args)
     {
         Args = Utils.GetTokensFromArgsString(args);
     }
-
-    public Queue<Queue<string>> Args { get; set; }
-
+    
     public void VisitClass(IClass element)
     {
         if (IsCompliantToArgs(element))
@@ -62,10 +62,9 @@ public class FindVisitor : IVisitor
             var arg = argsMock.Dequeue();
             if (arg.Count < 2) return true;
 
-            bool result;
-            DecomposeArgument(element, arg, out var operand, out var @operator, out var strVal);
+            Utils.DecomposeArgument(element, arg, out var operand, out var @operator, out var strVal);
 
-            result = IsCompliantToArgument(element, operand, strVal, @operator);
+            var result = IsCompliantToArgument(element, operand, strVal, @operator);
 
             if (!result) return false;
         }
@@ -108,15 +107,5 @@ public class FindVisitor : IVisitor
         return result;
     }
 
-    private static void DecomposeArgument<T>(T element, Queue<string> arg,
-        out PropertyInfo operand, out string @operator, out string strVal)
-    {
-        var temp = arg.Dequeue();
-        strVal = arg.Dequeue();
-
-        var opString = temp.TrimEnd(temp[^1]);
-        var a = element.GetType().GetProperties();
-        operand = a.First(s => opString.Equals(s.Name, StringComparison.CurrentCultureIgnoreCase));
-        @operator = temp[^1].ToString();
-    }
+    
 }

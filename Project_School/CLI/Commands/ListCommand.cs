@@ -8,6 +8,7 @@ namespace Project_School.CLI.Commands;
 public class ListCommand : ICommand
 {
     private ListVisitor _visitor;
+    public Types Type { get; set; }
 
     public ListCommand()
     {
@@ -19,7 +20,6 @@ public class ListCommand : ICommand
         Initialize(type, string.Empty);
     }
 
-    public Types Type { get; set; }
 
     public void Initialize(Types type, string args)
     {

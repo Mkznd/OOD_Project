@@ -6,6 +6,14 @@ namespace Project_School.BaseRepresentation;
 
 public class Class : IClass
 {
+    public Class()
+    {
+        Name = string.Empty;
+        Code = string.Empty;
+        Duration = 0;
+        Teachers = new List<ITeacher>();
+        Students = new List<IHuman>();
+    }
     public Class(string name, string code, uint duration, List<ITeacher> teachers, List<IHuman> students)
     {
         Name = name;

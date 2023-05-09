@@ -6,8 +6,17 @@ namespace Project_School.FirstRepresentation;
 
 public class ClassString
 {
-    public ClassString(string name, string code, uint duration, List<ITeacher> teachers,
-        List<IHuman> students)
+    public ClassString()
+    {
+        Name = string.Empty;
+        Code = string.Empty;
+        Duration = 0;
+        Teachers = new List<string>();
+        Students = new List<string>();
+        ClassList.AddToList(new ClassStringAdapter(this));
+    }
+    public ClassString(string name, string code, uint duration, IEnumerable<ITeacher> teachers,
+        IEnumerable<IHuman> students)
     {
         Name = name;
         Code = code;
