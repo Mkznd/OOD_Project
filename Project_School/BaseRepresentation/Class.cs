@@ -1,6 +1,4 @@
-﻿using Project_School.FirstRepresentation.Adapters;
-using Project_School.Interfaces;
-using Project_School.Interfaces.Common;
+﻿using Project_School.Interfaces.Common;
 using Project_School.Lists;
 using Project_School.StringBuilders;
 

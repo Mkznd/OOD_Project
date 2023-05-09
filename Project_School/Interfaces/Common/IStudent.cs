@@ -1,4 +1,4 @@
-﻿using Project_School.Interfaces.Visitor;
+﻿using Project_School.Interfaces.CLI;
 
 namespace Project_School.Interfaces.Common;
 

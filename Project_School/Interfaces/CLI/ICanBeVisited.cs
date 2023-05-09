@@ -1,4 +1,4 @@
-namespace Project_School.Interfaces.Visitor;
+namespace Project_School.Interfaces.CLI;
 
 public interface ICanBeVisited
 {

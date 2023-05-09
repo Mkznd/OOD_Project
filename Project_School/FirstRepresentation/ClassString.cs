@@ -1,16 +1,13 @@
 ﻿using Project_School.FirstRepresentation.Adapters;
-using Project_School.Interfaces;
 using Project_School.Interfaces.Common;
 using Project_School.Lists;
 
 namespace Project_School.FirstRepresentation;
 
-
 public class ClassString
 {
-
     public ClassString(string name, string code, uint duration, List<ITeacher> teachers,
-        List<IHuman> students) 
+        List<IHuman> students)
     {
         Name = name;
         Code = code;

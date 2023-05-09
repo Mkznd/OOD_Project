@@ -1,5 +1,4 @@
 ﻿using Project_School.Enums;
-using Project_School.Interfaces;
 using Project_School.Interfaces.Common;
 using Project_School.Lists;
 using Project_School.StringBuilders;
@@ -9,13 +8,7 @@ namespace Project_School.FirstRepresentation.Adapters;
 public class RoomStringAdapter : IRoom
 {
     private readonly RoomString _roomString;
-    private List<IClass> GetClasses()
-    {
-        if (_roomString.Classes == null) return new List<IClass>();
-        return ClassList.Classes
-            .Where(kvp=> _roomString.Classes.Contains(kvp.Key))
-            .Select(kvp => kvp.Value).ToList();
-    }
+
     public RoomStringAdapter(RoomString roomString)
     {
         _roomString = roomString;
@@ -38,6 +31,15 @@ public class RoomStringAdapter : IRoom
         get => GetClasses();
         set => _roomString.Classes = value?.Select(ClassList.GetId).ToList();
     }
+
+    private List<IClass> GetClasses()
+    {
+        if (_roomString.Classes == null) return new List<IClass>();
+        return ClassList.Classes
+            .Where(kvp => _roomString.Classes.Contains(kvp.Key))
+            .Select(kvp => kvp.Value).ToList();
+    }
+
     public override string ToString()
     {
         return RoomStringBuilder.GetString(this);

@@ -5,10 +5,12 @@ namespace Project_School.SecondRepresentation;
 
 public class StudentTuple
 {
-    public List<Tuple<string, object>> Fileds;
-    public StudentTuple(List<Tuple<string, object>> fileds)
+    // ReSharper disable once FieldCanBeMadeReadOnly.Global
+    public List<Tuple<string, object>> Fields;
+
+    public StudentTuple(List<Tuple<string, object>> fields)
     {
-        this.Fileds = fileds;
+        Fields = fields;
         StudentList.AddToList(new StudentTupleAdapter(this));
     }
 }

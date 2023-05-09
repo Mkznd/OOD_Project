@@ -1,5 +1,4 @@
 ﻿using Project_School.Enums;
-using Project_School.Interfaces;
 using Project_School.Interfaces.Common;
 using Project_School.Lists;
 using Project_School.StringBuilders;
@@ -22,6 +21,6 @@ public class Room : IRoom
 
     public override string ToString()
     {
-        return  RoomStringBuilder.GetString(this);
+        return RoomStringBuilder.GetString(this);
     }
 }

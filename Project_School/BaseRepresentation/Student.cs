@@ -1,5 +1,4 @@
-﻿using Project_School.Interfaces;
-using Project_School.Interfaces.Common;
+﻿using Project_School.Interfaces.Common;
 using Project_School.Lists;
 using Project_School.StringBuilders;
 
@@ -15,10 +14,12 @@ public class Student : IStudent
         Classes = classes;
         StudentList.AddToList(this);
     }
+
     public uint Semester { get; set; }
     public List<string> Names { get; set; }
     public string Surname { get; set; }
     public List<IClass>? Classes { get; set; }
+
     public override string ToString()
     {
         return StudentStringBuilder.GetString(this);

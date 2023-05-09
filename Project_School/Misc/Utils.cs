@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using Project_School.CLI.Commands;
+﻿using System.Text.RegularExpressions;
 using Project_School.Enums;
-using Project_School.Interfaces.Visitor;
+using Project_School.Interfaces.CLI;
 using Project_School.Lists;
 
 namespace Project_School.Misc;
 
 public static class Utils
 {
-
     public static List<ICanBeVisited> GetListFromType(Types type)
     {
         return type switch
@@ -24,9 +22,11 @@ public static class Utils
     public static Queue<Queue<string>> GetTokensFromArgsString(string args)
     {
         var partiallyBroken = new Queue<string>(args.Split(","));
-        string[] delimiters = {"=", ">", "<"};
+        var pattern = @"(?<=[<>=])";
         var result = partiallyBroken
-            .Select(s => new Queue<string>(s.Split(delimiters, StringSplitOptions.TrimEntries)));
+            .Select(s
+                => new Queue<string>(Regex.Split(s, pattern)));
+
         var queue = new Queue<Queue<string>>(result);
         return queue;
     }

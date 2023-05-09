@@ -3,6 +3,7 @@ using Project_School.FirstRepresentation.Adapters;
 using Project_School.Lists;
 
 namespace Project_School.FirstRepresentation;
+
 public class RoomString
 {
     public RoomString(uint number, RoomType type, List<string>? classes)

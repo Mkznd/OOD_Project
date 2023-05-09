@@ -1,6 +1,4 @@
-﻿using Project_School.Interfaces.Iterator;
-
-namespace Project_School.Iterator.Algorithms;
+﻿namespace Project_School.Iterator.Algorithms;
 
 /// <summary>
 ///     Algorithm to print elements of the collection implementing

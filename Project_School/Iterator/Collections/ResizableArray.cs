@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Project_School.Interfaces.Iterator;
 
 namespace Project_School.Iterator.Collections;
 

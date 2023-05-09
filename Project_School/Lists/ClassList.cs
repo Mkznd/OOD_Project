@@ -1,5 +1,4 @@
-﻿using Project_School.Interfaces;
-using Project_School.Interfaces.Common;
+﻿using Project_School.Interfaces.Common;
 
 namespace Project_School.Lists;
 
@@ -11,6 +10,7 @@ public static class ClassList
     {
         return $"{classString.Name}{classString.Code}{classString.Duration}";
     }
+
     public static void AddToList(IClass @class)
     {
         Classes.Add(GetId(@class), @class);

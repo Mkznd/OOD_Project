@@ -1,7 +1,4 @@
-﻿using Project_School.FirstRepresentation;
-using Project_School.Interfaces;
-using Project_School.Interfaces.Common;
-using Project_School.Lists;
+﻿using Project_School.Interfaces.Common;
 using Project_School.StringBuilders;
 
 namespace Project_School.SecondRepresentation.Adapters;
@@ -13,6 +10,9 @@ public class ClassTupleAdapter : IClass
     private const string DurationString = "Duration";
     private const string TeachersString = "Teachers";
     private const string StudentsString = "Students";
+
+    private readonly ClassTuple _classTuple;
+
     public ClassTupleAdapter(ClassTuple classTuple)
     {
         _classTuple = classTuple;
@@ -38,7 +38,7 @@ public class ClassTupleAdapter : IClass
     {
         get =>
             _classTuple.Fields.Where(f => f.Item1 == DurationString)
-                .Select(f =>  (uint) (int) f.Item2).FirstOrDefault();
+                .Select(f => (uint) (int) f.Item2).FirstOrDefault();
         set => throw new NotImplementedException();
     }
 
@@ -62,6 +62,4 @@ public class ClassTupleAdapter : IClass
     {
         return ClassStringBuilder.GetString(this);
     }
-
-    private readonly ClassTuple _classTuple;
 }
