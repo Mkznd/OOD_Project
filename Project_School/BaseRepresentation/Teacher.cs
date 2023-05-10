@@ -7,6 +7,15 @@ namespace Project_School.BaseRepresentation;
 
 public class Teacher : ITeacher
 {
+    public Teacher()
+    {
+        Names = new List<string>();
+        Surname = string.Empty;
+        Rank = default;
+        Code = string.Empty;
+        Classes = default;
+    }
+
     public Teacher(List<string> names, string surname, TeacherRank rank, string code, List<IClass>? classes = null)
     {
         Names = names;

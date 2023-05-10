@@ -15,6 +15,7 @@ public class ClassString
         Students = new List<string>();
         ClassList.AddToList(new ClassStringAdapter(this));
     }
+
     public ClassString(string name, string code, uint duration, IEnumerable<ITeacher> teachers,
         IEnumerable<IHuman> students)
     {

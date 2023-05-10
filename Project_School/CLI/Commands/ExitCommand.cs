@@ -5,7 +5,6 @@ namespace Project_School.CLI.Commands;
 
 public class ExitCommand : ICommand
 {
-
     public void Execute()
     {
         Environment.Exit(0);

@@ -13,7 +13,7 @@ public class FindVisitor : IVisitor
     {
         Args = Utils.GetTokensFromArgsString(args);
     }
-    
+
     public void VisitClass(IClass element)
     {
         if (IsCompliantToArgs(element))
@@ -106,6 +106,4 @@ public class FindVisitor : IVisitor
 
         return result;
     }
-
-    
 }

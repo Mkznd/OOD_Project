@@ -105,7 +105,7 @@ internal static class Program
         {
             var inputString = Console.ReadLine();
             if (inputString == null) return;
-            
+
             var input = inputString.Split(' ', 3, StringSplitOptions.TrimEntries);
             var command = CommandList.GetCommandFromString(input[0]);
             bool tryParse;
@@ -119,6 +119,7 @@ internal static class Program
             {
                 tryParse = TryParse(input[1], true, out type);
             }
+
             if (!tryParse) return;
             var argsString = input.Length > 2 ? input[2] : string.Empty;
             command.Initialize(type, argsString);

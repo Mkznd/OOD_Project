@@ -7,6 +7,13 @@ namespace Project_School.BaseRepresentation;
 
 public class Room : IRoom
 {
+    public Room()
+    {
+        Number = 0;
+        Type = default;
+        Classes = new List<IClass>();
+    }
+
     public Room(uint number, RoomType type, List<IClass> classes)
     {
         Number = number;

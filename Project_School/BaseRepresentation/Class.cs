@@ -14,6 +14,7 @@ public class Class : IClass
         Teachers = new List<ITeacher>();
         Students = new List<IHuman>();
     }
+
     public Class(string name, string code, uint duration, List<ITeacher> teachers, List<IHuman> students)
     {
         Name = name;

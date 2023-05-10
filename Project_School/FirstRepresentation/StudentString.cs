@@ -6,6 +6,14 @@ namespace Project_School.FirstRepresentation;
 
 public class StudentString
 {
+    public StudentString()
+    {
+        Names = new List<string>();
+        Surname = string.Empty;
+        Semester = default;
+        Classes = default;
+    }
+
     public StudentString(List<string> names, string surname, uint semester, List<IClass>? classes = null)
     {
         Names = names;

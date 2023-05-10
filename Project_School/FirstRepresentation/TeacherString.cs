@@ -7,6 +7,15 @@ namespace Project_School.FirstRepresentation;
 
 public class TeacherString
 {
+    public TeacherString()
+    {
+        Names = new List<string>();
+        Surname = string.Empty;
+        Rank = default;
+        Code = string.Empty;
+        Classes = default;
+    }
+
     public TeacherString(List<string> names, string surname, TeacherRank rank,
         string code, List<IClass>? classes = null)
     {

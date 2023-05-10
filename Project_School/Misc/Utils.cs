@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Project_School.BaseRepresentation;
 using Project_School.Enums;
@@ -11,7 +12,6 @@ public static class Utils
 {
     public static List<ICanBeVisited> GetListFromType(Types type)
     {
-
         return type switch
         {
             Types.Class => new List<ICanBeVisited>(ClassList.Classes.Values.ToList()),
@@ -44,7 +44,7 @@ public static class Utils
         const string pattern = @"(?<=[<>=])";
         return new Queue<string>(Regex.Split(s, pattern));
     }
-    
+
     public static void DecomposeArgument<T>(T element, Queue<string> arg,
         out PropertyInfo operand, out string @operator, out string strVal)
     {
@@ -55,5 +55,26 @@ public static class Utils
         var a = element.GetType().GetProperties();
         operand = a.First(s => opString.Equals(s.Name, StringComparison.CurrentCultureIgnoreCase));
         @operator = temp[^1].ToString();
+    }
+
+    public static object ParseNumericString(string input)
+    {
+        var numericTypes = new Type[] {typeof(int), typeof(long), typeof(float), typeof(double), typeof(decimal)};
+        foreach (var type in numericTypes)
+        {
+            if (!TypeDescriptor.GetConverter(type).CanConvertFrom(typeof(string))) continue;
+            try
+            {
+                var value = Convert.ChangeType(input, type);
+                return value;
+            }
+            catch
+            {
+                // Conversion failed, try the next type
+            }
+        }
+
+        // If we've reached this point, the input string couldn't be parsed into any of the numeric types
+        return input;
     }
 }

@@ -7,7 +7,7 @@ namespace Project_School.CLI.Commands;
 
 public class AddCommand : ICommand
 {
-    private  AddVisitor _visitor;
+    private AddVisitor _visitor;
     private Representation _representation;
     public Types _Type { get; set; }
 
@@ -16,11 +16,12 @@ public class AddCommand : ICommand
         _representation = Representation.Default;
         _visitor = new AddVisitor();
     }
+
     public AddCommand(Types type, string representation)
     {
         Initialize(type, representation);
     }
-    
+
     public void Execute()
     {
         var e = Utils.GetListFromType(_Type).FirstOrDefault();
