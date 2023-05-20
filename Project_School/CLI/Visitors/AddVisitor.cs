@@ -14,7 +14,6 @@ namespace Project_School.CLI.Visitors;
 public class AddVisitor : IVisitor
 {
     private const string Done = "done";
-    private const string Exit = "exit";
     private readonly Representation _representation;
 
     public AddVisitor()
@@ -26,66 +25,10 @@ public class AddVisitor : IVisitor
         _representation = rep;
     }
 
-    private static bool IsValueType(PropertyInfo p)
-    {
-        return !typeof(IEnumerable).IsAssignableFrom(p.PropertyType)
-               || p.PropertyType == typeof(string);
-    }
-
-    
-    private static void FillObjectWithInputs(Dictionary<string, object> inputObjects, object obj, Type type)
-    {
-        foreach (var kvp in inputObjects)
-        {
-            var prop = obj.GetType().GetProperty(kvp.Key);
-            if (prop is null)
-            {
-                throw new ArgumentException("Wrong parameter detected!");
-            }
-
-            if (type.IsEnum && prop.PropertyType == type)
-            {
-                if (Enum.TryParse(kvp.Value.ToString(), ignoreCase: true, out TeacherRank result))
-                {
-                    prop.SetValue(obj, result);
-                }
-            }
-            else
-            {
-                prop.SetValue(obj,
-                    prop.PropertyType == type ? Convert.ChangeType(kvp.Value.ToString() ?? "0", type) : kvp.Value);
-            }
-            
-        }
-    }
-
-    private static Dictionary<string, object> GetInputs(object element, Type type, out string input)
-    {
-        var availableProps = type.GetProperties().Where(IsValueType).Select(p => p.Name);
-        var inputObjects = new Dictionary<string, object>();
-        foreach (var e in availableProps)
-        {
-            inputObjects[e] = new object();
-        }
-
-        input = Console.ReadLine();
-        while (!input.Equals(Done, StringComparison.InvariantCultureIgnoreCase)
-               && !input.Equals(Exit, StringComparison.InvariantCultureIgnoreCase))
-        {
-            var argsQueue = Utils.BreakArgumentIntoQueue(input);
-            Utils.DecomposeArgument(element, argsQueue,
-                out var operand, out var @operator, out var strVal);
-            inputObjects[operand.Name] = strVal;
-            input = Console.ReadLine();
-        }
-
-        return inputObjects;
-    }
-    
     public void VisitClass(IClass element)
     {
         OutputAvailableFields(typeof(Class));
-        var inputObjects = GetInputs(element, typeof(IClass), out var input);
+        var inputObjects = InputCommandsFunctions.GetInputs(element, typeof(IClass), out var input);
         Console.WriteLine("Input finished!");
         if (input.Equals(Done, StringComparison.InvariantCultureIgnoreCase))
         {
@@ -93,12 +36,12 @@ public class AddVisitor : IVisitor
             if (_representation == Representation.Base)
             {
                 @class = new Class();
-                FillObjectWithInputs(inputObjects, @class, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, @class, typeof(uint));
             }
             else
             {
                 var classString = new ClassString();
-                FillObjectWithInputs(inputObjects, classString, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, classString, typeof(uint));
                 @class = new ClassStringAdapter(classString);
             }
 
@@ -113,7 +56,7 @@ public class AddVisitor : IVisitor
     public void VisitRoom(IRoom element)
     {
         OutputAvailableFields(typeof(Room));
-        var inputObjects = GetInputs(element, typeof(IRoom), out var input);
+        var inputObjects =  InputCommandsFunctions.GetInputs(element, typeof(IRoom), out var input);
         Console.WriteLine("Input finished!");
         if (input.Equals(Done, StringComparison.InvariantCultureIgnoreCase))
         {
@@ -121,12 +64,12 @@ public class AddVisitor : IVisitor
             if (_representation == Representation.Base)
             {
                 room = new Room();
-                FillObjectWithInputs(inputObjects, room, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, room, typeof(uint));
             }
             else
             {
                 var roomString = new RoomString();
-                FillObjectWithInputs(inputObjects, roomString, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, roomString, typeof(uint));
                 room = new RoomStringAdapter(roomString);
             }
 
@@ -141,7 +84,7 @@ public class AddVisitor : IVisitor
     public void VisitStudent(IStudent element)
     {
         OutputAvailableFields(typeof(Student));
-        var inputObjects = GetInputs(element, typeof(IStudent), out var input);
+        var inputObjects =  InputCommandsFunctions.GetInputs(element, typeof(IStudent), out var input);
         Console.WriteLine("Input finished!");
         if (input.Equals(Done, StringComparison.InvariantCultureIgnoreCase))
         {
@@ -149,12 +92,12 @@ public class AddVisitor : IVisitor
             if (_representation == Representation.Base)
             {
                 student = new Student();
-                FillObjectWithInputs(inputObjects, student, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, student, typeof(uint));
             }
             else
             {
                 var studentString = new StudentString();
-                FillObjectWithInputs(inputObjects, studentString, typeof(uint));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, studentString, typeof(uint));
                 student = new StudentStringAdapter(studentString);
             }
 
@@ -169,7 +112,7 @@ public class AddVisitor : IVisitor
     public void VisitTeacher(ITeacher element)
     {
         OutputAvailableFields(typeof(Teacher));
-        var inputObjects = GetInputs(element, typeof(ITeacher), out var input);
+        var inputObjects =  InputCommandsFunctions.GetInputs(element, typeof(ITeacher), out var input);
         Console.WriteLine("Input finished!");
         if (input.Equals(Done, StringComparison.InvariantCultureIgnoreCase))
         {
@@ -177,12 +120,12 @@ public class AddVisitor : IVisitor
             if (_representation == Representation.Base)
             {
                 teacher = new Teacher();
-                FillObjectWithInputs(inputObjects, teacher, typeof(TeacherRank));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, teacher, typeof(TeacherRank));
             }
             else
             {
                 var teacherString = new TeacherString();
-                FillObjectWithInputs(inputObjects, teacherString, typeof(TeacherRank));
+                InputCommandsFunctions.FillObjectWithInputs(inputObjects, teacherString, typeof(TeacherRank));
                 teacher = new TeacherStringAdapter(teacherString);
             }
 
@@ -196,7 +139,7 @@ public class AddVisitor : IVisitor
 
     private static void OutputAvailableFields(Type type)
     {
-        var props = type.GetProperties().Where(IsValueType).Select(p => p.Name);
+        var props = type.GetProperties().Where(InputCommandsFunctions.IsValueType).Select(p => p.Name);
         Console.WriteLine($"Available fields: [{string.Join(',', props)}]");
     }
 }

@@ -10,7 +10,8 @@ public static class CommandList
         {"list", new ListCommand()},
         {"find", new FindCommand()},
         {"exit", new ExitCommand()},
-        {"add", new AddCommand()}
+        {"add", new AddCommand()},
+        {"edit", new EditCommand()}
     };
 
     public static ICommand GetCommandFromString(string s)

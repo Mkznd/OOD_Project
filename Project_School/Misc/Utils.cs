@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using Project_School.BaseRepresentation;
 using Project_School.Enums;
 using Project_School.Interfaces.CLI;
+using Project_School.Interfaces.Common;
 using Project_School.Lists;
 
 namespace Project_School.Misc;
@@ -18,6 +19,19 @@ public static class Utils
             Types.Teacher => new List<ICanBeVisited>(TeacherList.Teachers.Values.ToList()),
             Types.Student => new List<ICanBeVisited>(StudentList.Students.Values.ToList()),
             Types.Room => new List<ICanBeVisited>(RoomList.Rooms.Values.ToList()),
+            Types.Default => throw new InvalidOperationException(),
+            _ => throw new InvalidOperationException()
+        };
+    }
+    
+    public static dynamic GetRealTypeFromICanBeVisited(ICanBeVisited element,Types type)
+    {
+        return type switch
+        {
+            Types.Class => (IClass)element,
+            Types.Teacher => (ITeacher)element,
+            Types.Student => (IStudent)element,
+            Types.Room =>(IRoom)element,
             Types.Default => throw new InvalidOperationException(),
             _ => throw new InvalidOperationException()
         };
@@ -77,4 +91,5 @@ public static class Utils
         // If we've reached this point, the input string couldn't be parsed into any of the numeric types
         return input;
     }
+
 }
