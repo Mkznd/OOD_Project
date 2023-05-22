@@ -28,7 +28,7 @@ public static class ArgumentComplianceChecker
             var arg = argsMock.Dequeue();
             if (arg.Count < 2) return true;
 
-            Utils.DecomposeArgument(element, arg, out var operand, out var @operator, out var strVal);
+            Utils.DecomposeArgument(typeof(T), arg, out var operand, out var @operator, out var strVal);
 
             var result = IsCompliantToArgument(element, operand, strVal, @operator);
 

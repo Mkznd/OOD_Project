@@ -14,29 +14,31 @@ namespace Project_School.CLI.Visitors;
 public class EditVisitor : IVisitor
 {
     private const string Done = "done";
-    private const string Exit = "exit";
-    public Queue<Queue<string>> Args { get; set; }
+    private readonly string? _inputResult;
+    private readonly Dictionary<string, object>? _inputObjects;
+    public Queue<Queue<string>>? Args { get; set; }
 
 
-    public EditVisitor(string args)
+    public EditVisitor(string args, Dictionary<string, object> inputObjects, string inputResult)
     {
         Args = Utils.GetTokensFromArgsString(args);
+        this._inputObjects = inputObjects;
+        this._inputResult = inputResult;
     }
 
-    
+    public EditVisitor()
+    {
+        this._inputResult = default;
+        this._inputObjects = default;
+        Args = default;
+    }
+
+
     public void VisitClass(IClass element)
     {
-        OutputAvailableFields(typeof(Class));
-        var inputObjects = InputCommandsFunctions.GetInputs(element, typeof(IClass), out var input);
-        Console.WriteLine("Input finished!");
-        if (input.Equals(Done, StringComparison.InvariantCultureIgnoreCase))
-        {
-                InputCommandsFunctions.FillObjectWithInputs(inputObjects, element, typeof(uint));
-        }
-        else
-        {
-            Environment.Exit(0);
-        }
+        if (_inputObjects is null || _inputResult is null ||
+            !_inputResult.Equals(Done, StringComparison.InvariantCultureIgnoreCase)) return;
+        InputCommandsFunctions.FillObjectWithInputs(_inputObjects, element, typeof(uint));
     }
 
     public void VisitRoom(IRoom element)
@@ -121,11 +123,5 @@ public class EditVisitor : IVisitor
         // {
         //     Environment.Exit(0);
         // }
-    }
-
-    private static void OutputAvailableFields(Type type)
-    {
-        var props = type.GetProperties().Where(InputCommandsFunctions.IsValueType).Select(p => p.Name);
-        Console.WriteLine($"Available fields: [{string.Join(',', props)}]");
     }
 }

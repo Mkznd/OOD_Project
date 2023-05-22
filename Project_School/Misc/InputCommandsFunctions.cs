@@ -14,14 +14,18 @@ public static class InputCommandsFunctions
                || p.PropertyType == typeof(string);
     }
 
-    public static Dictionary<string, object> GetInputs(object element, Type type, out string input)
+    public static Dictionary<string, object> GetInputs( Type type, out string input, object? element = null)
     {
-        var availablePropsStrings = type.GetProperties().Where(IsValueType).Select(p => p.Name);
         var availableProps = type.GetProperties().Where(IsValueType);
         var inputObjects = new Dictionary<string, object>();
         foreach (var e in availableProps)
         {
-            inputObjects[e.Name] = e.GetValue(element) ?? new object();
+            if (element != null)
+                inputObjects[e.Name] = e.GetValue(element) ?? new object();
+            else
+            {
+                inputObjects[e.Name] =  new object();
+            }
         }
 
         input = Console.ReadLine();
@@ -29,7 +33,7 @@ public static class InputCommandsFunctions
                && !input.Equals(Exit, StringComparison.InvariantCultureIgnoreCase))
         {
             var argsQueue = Utils.BreakArgumentIntoQueue(input);
-            Utils.DecomposeArgument(element, argsQueue,
+            Utils.DecomposeArgument(type, argsQueue,
                 out var operand, out var @operator, out var strVal);
             inputObjects[operand.Name] = strVal;
             input = Console.ReadLine();
@@ -58,14 +62,17 @@ public static class InputCommandsFunctions
             {
                 if (prop.PropertyType == typeof(uint))
                 {
-                    prop.SetValue(obj, uint.Parse(kvp.Value.ToString() ?? "0"));
+                    var parse = uint.TryParse(kvp.Value.ToString() ?? "0", out var result);
+                    prop.SetValue(obj, !parse ? 0 : result);
                 }
                 else if(prop.PropertyType == typeof(int))
                 {
-                    prop.SetValue(obj, int.Parse(kvp.Value.ToString() ?? "0"));
+                    var parse = int.TryParse(kvp.Value.ToString() ?? "0", out var result);
+                    prop.SetValue(obj, !parse ? 0 : result);
                 }
                 else if(prop.PropertyType == typeof(string))
                 {
+                    if(string.IsNullOrEmpty( kvp.Value.ToString())) prop.SetValue(obj, "");
                     prop.SetValue(obj, kvp.Value.ToString());
                 }
                 else

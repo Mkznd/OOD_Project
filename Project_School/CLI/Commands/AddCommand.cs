@@ -9,6 +9,7 @@ public class AddCommand : ICommand
 {
     private AddVisitor _visitor;
     private Representation _representation;
+
     public Types _Type { get; set; }
 
     public AddCommand()
@@ -33,6 +34,10 @@ public class AddCommand : ICommand
         _Type = type;
         var res = Enum.TryParse(args, true, out _representation);
         if (!res || _representation == Representation.Default) throw new ArgumentException("Invalid representation!");
-        _visitor = new AddVisitor(_representation);
+        Utils.OutputAvailableFields(Utils.GetRealTypeFromEnum(type));
+        var inputObjects
+            = InputCommandsFunctions.GetInputs(Utils.GetRealTypeFromEnum(type), out var input);
+        Console.WriteLine("Input finished!");
+        _visitor = new AddVisitor(_representation, inputObjects, input);
     }
 }

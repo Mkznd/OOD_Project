@@ -11,6 +11,11 @@ namespace Project_School.Misc;
 
 public static class Utils
 {
+    public static void OutputAvailableFields(Type type)
+    {
+        var props = type.GetProperties().Where(InputCommandsFunctions.IsValueType).Select(p => p.Name);
+        Console.WriteLine($"Available fields: [{string.Join(',', props)}]");
+    }
     public static List<ICanBeVisited> GetListFromType(Types type)
     {
         return type switch
@@ -32,6 +37,19 @@ public static class Utils
             Types.Teacher => (ITeacher)element,
             Types.Student => (IStudent)element,
             Types.Room =>(IRoom)element,
+            Types.Default => throw new InvalidOperationException(),
+            _ => throw new InvalidOperationException()
+        };
+    }
+    
+    public static Type GetRealTypeFromEnum(Types type)
+    {
+        return type switch
+        {
+            Types.Class => typeof(IClass),
+            Types.Teacher => typeof(ITeacher),
+            Types.Student => typeof(IStudent),
+            Types.Room =>typeof(IRoom),
             Types.Default => throw new InvalidOperationException(),
             _ => throw new InvalidOperationException()
         };
@@ -59,14 +77,14 @@ public static class Utils
         return new Queue<string>(Regex.Split(s, pattern));
     }
 
-    public static void DecomposeArgument<T>(T element, Queue<string> arg,
+    public static void DecomposeArgument(Type type, Queue<string> arg,
         out PropertyInfo operand, out string @operator, out string strVal)
     {
         var temp = arg.Dequeue();
         strVal = arg.Dequeue();
 
         var opString = temp.TrimEnd(temp[^1]);
-        var a = element.GetType().GetProperties();
+        var a = type.GetProperties();
         operand = a.First(s => opString.Equals(s.Name, StringComparison.CurrentCultureIgnoreCase));
         @operator = temp[^1].ToString();
     }

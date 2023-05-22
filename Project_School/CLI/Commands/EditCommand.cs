@@ -8,22 +8,14 @@ namespace Project_School.CLI.Commands;
 public class EditCommand : ICommand
 {
     private EditVisitor _visitor;
+    private List<dynamic> _list;
     private string _args;
-    public string Args
-    {
-        get => _args;
-        set
-        {
-            _visitor = new EditVisitor(value);
-            _args = value;
-        }
-    }
     public Types _Type { get; set; }
 
 
     public EditCommand()
     {
-        _visitor = new EditVisitor("");
+        _visitor = new EditVisitor();
         _args = string.Empty;
     }
 
@@ -34,19 +26,27 @@ public class EditCommand : ICommand
 
     public void Execute()
     {
-        var list = Utils.GetListFromType(_Type).Select(el => Utils.GetRealTypeFromICanBeVisited(el ,_Type))
-            .Where(el => ArgumentComplianceChecker
-                .IsCompliantToArgs(Utils.GetTokensFromArgsString(_args), el)).ToList();
-        if (list.Count == 1)
+        
+        if (_list.Count == 1)
         {
-            ((ICanBeVisited)list[0]).Accept(_visitor);
+            ((ICanBeVisited)_list[0]).Accept(_visitor);
         }
     }
 
     public void Initialize(Types type, string args)
     {
-        _visitor = new EditVisitor(args);
         _Type = type;
         _args = args;
+        var list = Utils.GetListFromType(_Type).Select(el => Utils.GetRealTypeFromICanBeVisited(el ,_Type))
+            .Where(el => ArgumentComplianceChecker
+                .IsCompliantToArgs(Utils.GetTokensFromArgsString(_args), el)).ToList();
+        _list = new List<dynamic>(list);
+
+        if (_list.Count != 1) return;
+        Utils.OutputAvailableFields(Utils.GetRealTypeFromEnum(type));
+        var inputObjects
+            = InputCommandsFunctions.GetInputs(Utils.GetRealTypeFromEnum(type), out string input, list[0]);
+        Console.WriteLine("Input finished!");
+        _visitor = new EditVisitor(args, inputObjects, input);
     }
 }
