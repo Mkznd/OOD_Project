@@ -12,8 +12,6 @@ public class ExitCommand : ICommand
 
     public void Initialize(Types type, string args)
     {
-        /*
-         * Exit command doesn't need to be initialized in any particular way.
-         */
+        Execute();
     }
 }

@@ -11,7 +11,7 @@ public static class CommandList
         {"find", new FindCommand()},
         {"exit", new ExitCommand()},
         {"add", new AddCommand()},
-        {"edit", new EditCommand()}
+        {"edit", new EditCommand()},
     };
 
     public static ICommand GetCommandFromString(string s)
